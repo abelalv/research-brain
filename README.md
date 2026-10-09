@@ -88,7 +88,7 @@ system `python3-venv` is needed. Disk: ~10 GB if you use a 7B local model plus e
 ### 2.1 One-command install
 
 ```bash
-git clone https://github.com/<your-user>/research-brain.git   # or unzip the archive
+git clone https://github.com/abelalv/research-brain.git   # or unzip the archive
 cd research-brain
 bash install.sh                  # vault in ~/ResearchBrain; asks before each change
 bash install.sh --with-mcp       # optional: MCP server, so Claude Code/Desktop can use the RAG
