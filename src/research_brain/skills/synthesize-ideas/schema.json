@@ -1,0 +1,17 @@
+{
+  "ideas": [
+    {
+      "title": "string - short name of the idea, at most 12 words",
+      "statement": "string - the idea as a testable proposition",
+      "operator": "method-transfer | analogy | combination | inversion | assumption-relaxation | generalization | specialization | scale-shift | contradiction-resolution | gap-filling",
+      "parents": ["string - slugs of the parent notes actually used"],
+      "rationale": "string - why the combination should work (mechanism)",
+      "novelty_check": "string - what is new vs the parents and existing ideas; what search would show it is not new",
+      "test": "string - smallest decisive experiment, proof or dataset that could refute it",
+      "assumptions": ["string"],
+      "risks": ["string"],
+      "scores": {"novelty": "integer 1-5", "feasibility": "integer 1-5", "impact": "integer 1-5"},
+      "next_step": "string - one concrete action of at most one day"
+    }
+  ]
+}

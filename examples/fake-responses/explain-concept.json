@@ -1,0 +1,26 @@
+Here is the concept page as JSON:
+
+```json
+{
+  "title": "Physics-Informed Neural Network",
+  "one_line": "A neural network trained to fit data while satisfying a differential equation, by adding the equation's residual to the loss.",
+  "intuition": "Think of fitting a flexible curve through a few noisy measurements while a referee checks, at many points, that the curve obeys the laws of physics. The data pull the curve towards observations; the referee pulls it towards physically possible shapes. The analogy breaks because the referee only looks at the points you choose (collocation points), not everywhere.",
+  "formal_definition": "Let $\mathcal{N}[u; \lambda] = 0$ on $\Omega \times (0,T]$ be a differential equation with parameters $\lambda$ and initial/boundary operator $\mathcal{B}[u] = g$. A PINN is a network $u_\theta : \Omega \times [0,T] \to \mathbb{R}^m$ trained by minimising $$\mathcal{L}(\theta,\lambda) = \frac{1}{N_d}\sum_{i=1}^{N_d} \| u_\theta(x_i,t_i) - y_i \|^2 + \frac{\lambda_r}{N_r}\sum_{k=1}^{N_r} \| \mathcal{N}[u_\theta;\lambda](x_k,t_k) \|^2 + \frac{\lambda_b}{N_b}\sum_{j=1}^{N_b} \| \mathcal{B}[u_\theta](x_j,t_j) - g_j \|^2,$$ where derivatives are computed by automatic differentiation. In the inverse problem, $\lambda$ is learned together with $\theta$.",
+  "worked_example": "Take $\dot u = -k u$, $u(0)=1$, unknown $k$, and two observations $u(1)=0.61$, $u(2)=0.37$. With $u_\theta$ and collocation points $t_k \in \{0, 0.5, \dots, 2\}$, the residual term is $\frac{1}{5}\sum_k (\dot u_\theta(t_k) + k\,u_\theta(t_k))^2$. The minimiser makes $u_\theta \approx e^{-kt}$ with $e^{-k} \approx 0.61$, so $k \approx -\ln 0.61 \approx 0.49$, consistent with $e^{-2k} \approx 0.37$.",
+  "misconceptions": [
+    {"misconception": "A small physics loss means the equation is satisfied everywhere.", "correction": "The residual is only penalised at collocation points; between them, and outside the sampled domain, it can be large."},
+    {"misconception": "PINNs make an ill-posed inverse problem well-posed.", "correction": "The physics loss regularises, but parameters that are not identifiable from the data remain undetermined; the network will still return a value."},
+    {"misconception": "The loss weights do not matter.", "correction": "The balance between data, residual and boundary terms strongly affects convergence; adaptive weighting schemes exist because hand-tuning is fragile."}
+  ],
+  "prerequisites": ["ordinary differential equation", "automatic differentiation", "gradient descent", "inverse problem"],
+  "related": ["collocation point", "neural operator", "identifiability", "galerkin method"],
+  "self_test": [
+    {"question": "Which three terms make up a typical PINN loss?", "answer": "Data misfit, differential-equation residual at collocation points, and initial/boundary condition penalty."},
+    {"question": "How are the derivatives in the residual computed?", "answer": "By automatic differentiation of the network output with respect to its inputs."},
+    {"question": "In the SIR inverse problem, why can a PINN return a confident but meaningless reporting fraction?", "answer": "Because the reporting fraction and the initial infected count are not jointly identifiable from early data; the optimiser picks one of many equally good fits."},
+    {"question": "Propose one way to check whether a trained PINN satisfies the ODE between collocation points.", "answer": "Evaluate the residual on a much finer, independent grid (or integrate the ODE with the learned parameters with a classical solver) and compare."}
+  ],
+  "vault_links": ["pinn-residuals-are-enforced-only-at-collocation-points", "a-pinn-treats-the-transmission-rate-as-a-trainable-parameter", "not-a-real-note"],
+  "tags": ["sciml", "pinn"]
+}
+```

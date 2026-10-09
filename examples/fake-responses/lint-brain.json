@@ -1,0 +1,13 @@
+{
+  "questions": [
+    {"question": "Which parameters of a network SIR model with reporting fraction are structurally identifiable from node-level incidence?", "why": "Every idea in the vault about networks depends on it, and no note answers it.", "related": ["reporting-rate-and-initial-infections-are-not-jointly-identifiable", "identifiability-analysis-before-pinn-training"]},
+    {"question": "How large can the residual be between collocation points for a PINN trained on SIR data?", "why": "The only argument in the vault is unsound precisely at this premise.", "related": ["pinn-residuals-are-enforced-only-at-collocation-points", "a-trained-pinn-equals-the-true-sir-trajectory"]},
+    {"question": "Does Laplacian coupling make unobserved nodes' transmission rates recoverable?", "why": "It is the testable core of the highest-scoring idea.", "related": ["graph-laplacian-residual-for-network-sir-pinns"]}
+  ],
+  "missing_concepts": ["identifiability", "collocation point", "graph laplacian"],
+  "suggested_sources": [
+    "A review of structural and practical identifiability in compartmental epidemic models",
+    "A survey of loss-balancing strategies for physics-informed neural networks",
+    "A paper on physics-informed learning on graphs or metapopulation models"
+  ]
+}

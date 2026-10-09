@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "research-brain"
+version = "0.1.0"
+description = "A research-focused second brain: Obsidian vault + local LLM (Ollama/LM Studio) or Claude, built on the LLM-wiki pattern with skills for idea segmentation, idea synthesis, concept explanation and deductive reasoning."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Abel Alvarez Bustos" }]
+dependencies = [
+    "pyyaml>=6.0",
+    "numpy>=1.26",
+    "sympy>=1.12",
+    "pypdf>=4.0",
+]
+
+[project.optional-dependencies]
+# Gateway to 100+ providers (Bedrock, Vertex AI, Azure OpenAI, Cohere...). Versions 1.82.7 and
+# 1.82.8 were a malicious supply-chain release (March 2026) and are excluded explicitly;
+# uv.lock pins an exact version with hashes.
+litellm = ["litellm!=1.82.7,!=1.82.8"]
+# Alternative vector store for the RAG index ([rag] backend = "chroma").
+chroma = ["chromadb>=0.5"]
+# MCP server (`rbrain mcp`) so Claude Code / Claude Desktop can use the vault's RAG as tools.
+mcp = ["mcp>=1.2"]
+dev = ["pytest>=8.0"]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+rbrain = "research_brain.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+research_brain = [
+    "skills/*/*.md",
+    "skills/*/*.json",
+    "vault_template/*.md",
+    "vault_template/*/*.md",
+    "vault_template/*/*.json",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

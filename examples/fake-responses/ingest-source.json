@@ -1,0 +1,29 @@
+{
+  "summary": "The text asks how to estimate the transmission rate $\\beta$ of an SIR model from noisy case counts. It proposes a physics-informed neural network that learns the epidemic trajectory and $\\beta$ jointly, and reports accurate recovery of a constant $\\beta$ but instability for time-varying $\\beta(t)$ and an identifiability problem with unknown reporting rates.",
+  "key_points": [
+    "Estimating $\\beta$ and $\\gamma$ from case counts is an inverse problem that can be ill-posed.",
+    "The PINN loss combines data misfit, ODE residual at collocation points and initial-condition penalties.",
+    "A constant $\\beta$ was recovered within 5% from 20 noisy observations in a synthetic experiment.",
+    "A time-varying $\\beta(t)$ required a smoothness penalty to be stable.",
+    "With an unknown reporting fraction $\\rho$, $\\rho$ and the initial infected are not jointly identifiable early in an epidemic."
+  ],
+  "methods": [
+    "Neural network $u_\\theta(t)$ approximating $(S, I, R)$ with $\\beta$ as a trainable parameter",
+    "Composite loss $\\mathcal{L}_{\\text{data}} + \\lambda_r \\mathcal{L}_{\\text{res}} + \\lambda_0 \\mathcal{L}_{\\text{IC}}$ with hand-tuned weights"
+  ],
+  "results": [
+    "$\\beta = 0.3$ recovered within 5% ($N = 10^5$, $\\gamma = 0.1$, 20 observations, 10% multiplicative noise)",
+    "Time-varying $\\beta(t)$ unstable without a smoothness penalty"
+  ],
+  "limitations": [
+    "Residual enforced only at collocation points",
+    "Results sensitive to the loss weights $\\lambda_r, \\lambda_0$",
+    "Only synthetic data; no comparison with classical least-squares fitting (reader's note)"
+  ],
+  "concepts": ["sir model", "inverse problem", "physics-informed neural network", "collocation point", "identifiability", "metapopulation model"],
+  "open_questions": [
+    "Can the method be extended to metapopulation models on contact networks with node-wise transmission rates?",
+    "How should the loss weights be chosen in a principled way?"
+  ],
+  "tags": ["pinn", "epidemiology", "inverse-problems", "sir"]
+}

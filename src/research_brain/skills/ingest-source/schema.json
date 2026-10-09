@@ -1,0 +1,10 @@
+{
+  "summary": "string - research question and main contribution in 2-3 sentences",
+  "key_points": ["string - one sentence each, 3 to 7 items"],
+  "methods": ["string"],
+  "results": ["string - with numbers and conditions when available"],
+  "limitations": ["string - mark your own observations with (reader's note)"],
+  "concepts": ["string - canonical concept names, 3 to 10"],
+  "open_questions": ["string"],
+  "tags": ["string - 3 to 8 short tags"]
+}

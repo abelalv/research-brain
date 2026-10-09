@@ -1,0 +1,17 @@
+{
+  "search": "-path:90-templates -file:index -file:log -file:Dashboard -file:lint-report",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "showArrow": true,
+  "colorGroups": [
+    {"query": "path:30-atoms", "color": {"a": 1, "rgb": 6000111}},
+    {"query": "path:40-concepts", "color": {"a": 1, "rgb": 3059051}},
+    {"query": "path:50-ideas", "color": {"a": 1, "rgb": 15770114}},
+    {"query": "path:60-arguments", "color": {"a": 1, "rgb": 9333999}},
+    {"query": "path:20-summaries", "color": {"a": 1, "rgb": 1812149}},
+    {"query": "path:10-sources", "color": {"a": 1, "rgb": 10133670}},
+    {"query": "path:70-answers", "color": {"a": 1, "rgb": 15026298}}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "title": "string - short title of the argument",
+  "dictionary": {"AtomName": "string - the one precise sentence this atom stands for"},
+  "premises": [
+    {"text": "string - premise in natural language", "formula": "string - e.g. Res0 & BC -> Solves", "source": "string slug or null"}
+  ],
+  "conclusion": {"text": "string", "formula": "string"},
+  "derivation": [
+    {"step": "integer", "formula": "string", "statement": "string", "rule": "string - e.g. modus ponens", "from": ["string - e.g. P1, P3, 2"]}
+  ],
+  "hidden_assumptions": ["string"],
+  "soundness": [
+    {"premise": "string - e.g. P1", "assessment": "supported | questionable | unsupported", "comment": "string"}
+  ],
+  "informal_verdict": "string - your own judgement before the symbolic check"
+}

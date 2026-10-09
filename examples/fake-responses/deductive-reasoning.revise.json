@@ -1,0 +1,18 @@
+{
+  "missing_premises": [
+    {
+      "formula": "Uniq",
+      "text": "The SIR initial value problem has a unique solution.",
+      "justification": "The counter-model has Uniq = F: without uniqueness, the network can be one of several solutions. The SIR right-hand side is polynomial, hence locally Lipschitz, so the Picard–Lindelöf theorem gives a unique local solution, which extends globally because the state stays in the bounded invariant set $S+I+R=N$, $S,I,R \\ge 0$.",
+      "plausibility": "high"
+    }
+  ],
+  "new_atoms": {},
+  "derivation": [
+    {"step": 1, "formula": "Res0 & IC", "statement": "Residual is zero and initial conditions hold.", "rule": "conjunction introduction", "from": ["P3", "P4"]},
+    {"step": 2, "formula": "Solves", "statement": "The network solves the IVP.", "rule": "modus ponens", "from": ["P1", "1"]},
+    {"step": 3, "formula": "Solves & Uniq", "statement": "The network solves a uniquely solvable IVP.", "rule": "conjunction introduction", "from": ["2", "P5"]},
+    {"step": 4, "formula": "Equal", "statement": "The network equals the true trajectory.", "rule": "modus ponens", "from": ["P2", "3"]}
+  ],
+  "comment": "With uniqueness the argument is valid. The claim still rests on P3, which holds only approximately and only at collocation points, so in practice the conclusion is 'the network is close to the true trajectory where the residual was checked'."
+}

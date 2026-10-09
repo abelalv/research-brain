@@ -1,0 +1,7 @@
+{
+  "questions": [
+    {"question": "string - specific, answerable research question", "why": "string - one sentence", "related": ["string - slugs from the index"]}
+  ],
+  "missing_concepts": ["string - most important concept pages to write first"],
+  "suggested_sources": ["string - kinds of sources to look for, never invented titles"]
+}

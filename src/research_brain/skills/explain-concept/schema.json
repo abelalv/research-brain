@@ -1,0 +1,13 @@
+{
+  "title": "string - canonical name of the concept",
+  "one_line": "string - what it is and what it is for, one sentence",
+  "intuition": "string - picture or analogy without jargon, and where the analogy breaks",
+  "formal_definition": "string - precise definition in LaTeX with every symbol defined",
+  "worked_example": "string - smallest non-trivial example computed step by step",
+  "misconceptions": [{"misconception": "string", "correction": "string"}],
+  "prerequisites": ["string - canonical concept names"],
+  "related": ["string - canonical concept names"],
+  "self_test": [{"question": "string", "answer": "string"}],
+  "vault_links": ["string - slugs of provided vault notes that are genuinely related"],
+  "tags": ["string"]
+}

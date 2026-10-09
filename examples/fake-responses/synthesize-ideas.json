@@ -1,0 +1,43 @@
+{
+  "ideas": [
+    {
+      "title": "Graph-Laplacian residual for network SIR PINNs",
+      "statement": "Adding the residual of a network SIR model with Laplacian coupling, $\\dot I_i = \\beta_i S_i I_i / N_i - \\gamma I_i - \\kappa \\sum_j L_{ij} I_j$, to the PINN loss lets a single model recover node-wise transmission rates $\\beta_i$ from incidence observed at only a subset of nodes.",
+      "operator": "combination",
+      "parents": ["a-pinn-treats-the-transmission-rate-as-a-trainable-parameter", "can-pinns-estimate-spatially-varying-transmission-on-contact-networks"],
+      "rationale": "The Laplacian term propagates information from observed to unobserved nodes, so the physics loss acts as a spatial regulariser in the same way the ODE residual regularises the time series in the single-population PINN.",
+      "novelty_check": "New relative to the parents: neither note handles unobserved nodes. Network-coupled PINNs probably exist for diffusion PDEs on graphs; a literature search on 'physics-informed graph neural network epidemic metapopulation' would show whether node-wise $\\beta_i$ recovery under partial observation has been studied.",
+      "test": "Synthetic 50-node Erdős–Rényi network, observe 30% of nodes with 10% noise; compare the error in $\\beta_i$ against independent per-node PINNs and against a model without the Laplacian residual.",
+      "assumptions": ["The contact graph and coupling strength $\\kappa$ are known", "Recovery rate $\\gamma$ is shared by all nodes"],
+      "risks": ["Unobserved nodes may be unidentifiable when weakly connected", "Training cost grows with the number of nodes"],
+      "scores": {"novelty": 3, "feasibility": 4, "impact": 4},
+      "next_step": "Write the network SIR simulator and generate the 50-node synthetic dataset."
+    },
+    {
+      "title": "Learn the mobility graph from epidemic curves",
+      "statement": "Inverting the network problem — treating the coupling weights $w_{ij}$ as unknown and the rates as known — allows a PINN to infer an effective mobility network from node-level incidence curves.",
+      "operator": "inversion",
+      "parents": ["a-pinn-treats-the-transmission-rate-as-a-trainable-parameter", "can-pinns-estimate-spatially-varying-transmission-on-contact-networks"],
+      "rationale": "The parent method already estimates unknown coefficients from trajectories; edge weights are just more coefficients, and incidence curves carry timing information about how infection moves between nodes.",
+      "novelty_check": "Swapping the unknowns turns rate estimation into network inference. Network reconstruction from epidemic data is an established field, so the new element would be the physics-informed formulation; a search on 'network inference from epidemic time series' is needed before investing time.",
+      "test": "Recover a known 10-node weighted graph from simulated curves; measure edge-weight error and how it degrades with noise and with the number of observed epidemic waves.",
+      "assumptions": ["Rates $\\beta, \\gamma$ known or estimated separately", "Sparse graph"],
+      "risks": ["Severe non-identifiability: many graphs fit the same curves", "Needs strong sparsity priors"],
+      "scores": {"novelty": 3, "feasibility": 3, "impact": 4},
+      "next_step": "Run a quick identifiability check: perturb one edge weight and measure the change in the incidence curves."
+    },
+    {
+      "title": "Identifiability analysis before PINN training",
+      "statement": "Running a structural identifiability analysis on the network SIR model before training tells which of $\\beta_i$, $\\rho$ and $I_i(0)$ a PINN can estimate, and which require priors or extra data such as serosurveys.",
+      "operator": "gap-filling",
+      "parents": ["a-pinn-treats-the-transmission-rate-as-a-trainable-parameter", "can-pinns-estimate-spatially-varying-transmission-on-contact-networks"],
+      "rationale": "PINNs return a number for every parameter even when the data cannot determine it; an identifiability step separates genuine estimates from artefacts of initialisation and regularisation.",
+      "novelty_check": "Identifiability analysis is standard in mathematical epidemiology; the contribution would be a workflow coupling it to PINN design for network models. Not new as a method, possibly useful as a methodological paper.",
+      "test": "Apply differential-algebra identifiability analysis to a 3-node network SIR model with reporting fraction; check that PINN estimates of non-identifiable parameters vary across random seeds while identifiable ones do not.",
+      "assumptions": ["Symbolic identifiability tools scale to small networks"],
+      "risks": ["Structural identifiability ignores noise (practical identifiability may still fail)"],
+      "scores": {"novelty": 2, "feasibility": 5, "impact": 3},
+      "next_step": "Write the 3-node model in SymPy and list its observable outputs."
+    }
+  ]
+}

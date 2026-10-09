@@ -1,0 +1,16 @@
+{
+  "main_question": "string - the question the text tries to answer",
+  "structure": "string - one sentence describing how the atoms form the argument",
+  "atoms": [
+    {
+      "title": "string - declarative sentence, at most 12 words",
+      "statement": "string - the self-contained idea in 1-3 sentences, symbols defined",
+      "kind": "definition | assumption | claim | method | result | evidence | question | hypothesis",
+      "evidence": "string - short quote (<= 40 words) or close paraphrase from the text",
+      "locator": "string - section / page / equation, or empty",
+      "confidence": "low | medium | high",
+      "concepts": ["string - canonical concept names, 1 to 4"],
+      "depends_on": ["integer - 0-based indices of other atoms in this list"]
+    }
+  ]
+}

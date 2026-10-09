@@ -1,0 +1,33 @@
+{
+  "title": "A trained PINN equals the true SIR trajectory",
+  "dictionary": {
+    "Res0": "The ODE residual of the trained network is zero on the whole time interval",
+    "IC": "The network satisfies the initial conditions",
+    "Solves": "The network solves the SIR initial value problem",
+    "Uniq": "The SIR initial value problem has a unique solution",
+    "Equal": "The trained network equals the true SIR trajectory"
+  },
+  "premises": [
+    {"text": "If the residual vanishes on the whole interval and the initial conditions hold, the network solves the initial value problem.", "formula": "Res0 & IC -> Solves", "source": null},
+    {"text": "If the network solves the initial value problem and that problem has a unique solution, the network equals the true trajectory.", "formula": "Solves & Uniq -> Equal", "source": null},
+    {"text": "Training drove the residual to zero.", "formula": "Res0", "source": null},
+    {"text": "The initial conditions are satisfied.", "formula": "IC", "source": null}
+  ],
+  "conclusion": {"text": "The trained network equals the true SIR trajectory.", "formula": "Equal"},
+  "derivation": [
+    {"step": 1, "formula": "Res0 & IC", "statement": "Residual is zero and initial conditions hold.", "rule": "conjunction introduction", "from": ["P3", "P4"]},
+    {"step": 2, "formula": "Solves", "statement": "The network solves the IVP.", "rule": "modus ponens", "from": ["P1", "1"]},
+    {"step": 3, "formula": "Equal", "statement": "The network equals the true trajectory.", "rule": "modus ponens", "from": ["P2", "2"]}
+  ],
+  "hidden_assumptions": [
+    "Step 3 needs uniqueness of the solution (Uniq), which no premise states.",
+    "P3 silently upgrades 'the residual is small at the collocation points' to 'the residual is zero on the whole interval' (quantifier slip)."
+  ],
+  "soundness": [
+    {"premise": "P1", "assessment": "supported", "comment": "True by definition of a solution of the IVP."},
+    {"premise": "P2", "assessment": "supported", "comment": "Two solutions of a uniquely solvable IVP coincide."},
+    {"premise": "P3", "assessment": "questionable", "comment": "Training only makes the residual small at collocation points ([[pinn-residuals-are-enforced-only-at-collocation-points]]); zero on the interval is not established."},
+    {"premise": "P4", "assessment": "supported", "comment": "Enforced by the initial-condition loss up to optimisation error."}
+  ],
+  "informal_verdict": "The derivation uses uniqueness at step 3 without a premise for it, so as stated the argument is invalid; it becomes valid once uniqueness is added, but its soundness still depends on P3."
+}

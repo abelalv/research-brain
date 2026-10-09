@@ -1,0 +1,15 @@
+{
+  "missing_premises": [
+    {
+      "formula": "string - using existing atoms or new ones declared in new_atoms",
+      "text": "string - the premise in natural language",
+      "justification": "string - why it closes the gap shown by the counter-model",
+      "plausibility": "low | medium | high - how likely it is to be true in this domain"
+    }
+  ],
+  "new_atoms": {"AtomName": "string - meaning of any new atom"},
+  "derivation": [
+    {"step": "integer", "formula": "string", "statement": "string", "rule": "string", "from": ["string"]}
+  ],
+  "comment": "string - what the repair means for the original claim"
+}
